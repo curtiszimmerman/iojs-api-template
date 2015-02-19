@@ -1,0 +1,33 @@
+{
+  "name": "iojs-api-template",
+  "version": "0.0.1",
+  "description": "API template boilerplate for io.js using es6/harmony features.",
+  "main": "app.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/curtiszimmerman/iojs-api-template.git"
+  },
+  "keywords": [
+    "iojs",
+    "node",
+    "api",
+    "template",
+    "es6",
+    "boilerplate"
+  ],
+  "author": "Curtis Zimmerman <software@curtisz.com> (http://curtisz.com/)",
+  "license": "AGPLv3",
+  "bugs": {
+    "url": "https://github.com/curtiszimmerman/iojs-api-template/issues"
+  },
+  "dependencies": {
+    "koa": "0.18.0"
+  },
+  "devDependencies": {
+    "mocha": "2.1.0",
+    "chai": "2.0.0"
+  }
+}
