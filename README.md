@@ -42,8 +42,6 @@ This application supports the following command-line options:
 -v, --version                display version information.
 ```
 
-##
-
 ## Contributing
 Contributions are welcome, but some standard guidelines apply. Pull requests that are simply stylistic or semantic changes will not be accepted. Pull requests that do not conform to existing code style will not be accepted. I am a busy person, and I will try my best to get to your pull request, but please understand that it may be some time before this happens. If it's urgent (bug/security fix), please drop me a line at software -at- curtisz -dot- com. Thanks!
 
