@@ -40,11 +40,23 @@ module.exports = exports = __api = (function() {
 	var $pubsub = new events.EventEmitter();
 
 	var init = (function() {
-		$data.server.argv = yargs
+		$data.settings.argv = yargs
 			.usage('Usage: $0 [OPTIONS]\n\nNote:\nThis application requires the following es6/harmony flags:\n--harmony --harmony_arrow_functions --harmony_classes')
 			.option('a', {
 				alias: 'address',
 				describe: 'server address to listen on. default localhost.',
+				type: 'string'
+			})
+			.option('c', {
+				alias: 'certificate',
+				describe: 'SSL certificate to use. implies -k.',
+				implies: 'k',
+				type: 'string'
+			})
+			.option('k', {
+				alias: 'key',
+				describe: 'SSL private key to use. implies -c.',
+				implies: 'c',
 				type: 'string'
 			})
 			.option('h', {
@@ -55,6 +67,11 @@ module.exports = exports = __api = (function() {
 				alias: 'loglevel',
 				describe: 'output loglevel (0-5). default 2.',
 				type: 'number'
+			})
+			.option('q', {
+				alias: 'quiet',
+				describe: 'quiet mode. no output except catastrophic errors.',
+				type: 'boolean'
 			})
 			.option('p', {
 				alias: 'port',
@@ -69,8 +86,12 @@ module.exports = exports = __api = (function() {
 			.version(() => require('./package').version)
 			.epilog('For more information, visit:\n https://github.com/curtiszimmerman/iojs-api-template')
 			.argv;
-
+		if (typeof($data.settings.argv.loglevel) !== 'undefined') $data.settings.logs.level = $data.settings.argv.loglevel;
+		if (typeof($data.settings.argv.quiet) !== 'undefined') $data.settings.logs.level = false;
 		$log = log.config( $data.settings.logs.level );
+		if (typeof($data.settings.argv.port) !== 'undefined') $data.server.port = $data.settings.argv.port;
+		if (typeof($data.settings.argv.address) !== 'undefined') $data.server.address = $data.settings.argv.address;
+
 	})();
 
 	var server = function() {
