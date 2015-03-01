@@ -6,7 +6,7 @@
 * @author curtis zimmerman
 * @contact software@curtisz.com
 * @license AGPLv3
-* @version 0.0.1a
+* @version 0.0.2
 */
 
 module.exports = exports = __api = (function() {
@@ -16,6 +16,7 @@ module.exports = exports = __api = (function() {
 	var events = require('events');
 	var koa = require('koa');
 	var pm2 = require('pm2');
+	var router = require('koa-router');
 	var yargs = require('yargs');
 
 	// local modules
@@ -34,6 +35,10 @@ module.exports = exports = __api = (function() {
 		server: {
 			address: '127.0.0.1',
 			port: 4488
+		},
+		stats: {
+			processed: 0,
+			version: '0.0.2'
 		}
 	};
 	var $log = null;
@@ -86,12 +91,17 @@ module.exports = exports = __api = (function() {
 			.version(() => require('./package').version)
 			.epilog('For more information, visit:\n https://github.com/curtiszimmerman/iojs-api-template')
 			.argv;
+		//
+		//
+		// you gotta sort this shit out with Log (0-4? 1-5? 0-5? wtf)
+		//
+		//
 		if (typeof($data.settings.argv.loglevel) !== 'undefined') $data.settings.logs.level = $data.settings.argv.loglevel;
-		if (typeof($data.settings.argv.quiet) !== 'undefined') $data.settings.logs.level = false;
+		if (typeof($data.settings.argv.quiet) !== 'undefined' && $data.settings.argv.quiet === true) $data.settings.logs.quiet = true, $data.settings.logs.level = false;
 		$log = log.config( $data.settings.logs.level );
 		if (typeof($data.settings.argv.port) !== 'undefined') $data.server.port = $data.settings.argv.port;
 		if (typeof($data.settings.argv.address) !== 'undefined') $data.server.address = $data.settings.argv.address;
-
+		$log.notice('initialization complete');
 	})();
 
 	var server = function() {
@@ -122,7 +132,7 @@ module.exports = exports = __api = (function() {
 		$app.on('error', err => $log.error('server error: '+err));
 
 		$app.listen( $data.server.port, $data.server.address );
-		$log.log('listening on '+$data.server.address+':'+$data.server.port);
+		$log.notice('listening on '+$data.server.address+':'+$data.server.port);
 	};
 
 	// if we're called as a module, it's testing time!
