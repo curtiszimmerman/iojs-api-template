@@ -15,8 +15,8 @@ module.exports = exports = __api = (function() {
 	// third-party modules
 	var events = require('events');
 	var koa = require('koa');
+	var koarouter = require('koa-router');
 	var pm2 = require('pm2');
-	var router = require('koa-router');
 	var yargs = require('yargs');
 
 	// local modules
@@ -43,6 +43,7 @@ module.exports = exports = __api = (function() {
 	};
 	var $log = null;
 	var $pubsub = new events.EventEmitter();
+	var $router = koarouter();
 
 	var init = (function() {
 		$data.settings.argv = yargs
@@ -105,9 +106,14 @@ module.exports = exports = __api = (function() {
 	})();
 
 	var server = function() {
-		var handler = function* (next) {
-			// handle req
-		};
+		$router.get('/', function *(next) {
+			// default route
+			this.body = '<html><body><a href="https://github.com/curtiszimmerman/iojs-api-template">iojs-api-template</a> by <a href="http://curtisz.com">curtisz</a></body></html>';
+		});
+
+		$router.get('/about', function *(next) {
+			// get about information
+		});
 
 		$app.use(function*(next) {
 			var start = new Date();
@@ -123,11 +129,8 @@ module.exports = exports = __api = (function() {
 			$log.log('<'+this.method+'> for ['+this.url+'] ('+respTime+'ms)');
 		});
 
-		$app.use(function*() {
-			this.body = {'Aloha': 'universe!'};
-			this.status = 200;
-			this.type = 'json';
-		});
+		$app.use($router.routes());
+		$app.use($router.allowedMethods());
 
 		$app.on('error', err => $log.error('server error: '+err));
 
