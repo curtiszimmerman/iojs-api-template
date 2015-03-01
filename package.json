@@ -1,6 +1,6 @@
 {
   "name": "iojs-api-template",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "API template boilerplate for io.js using es6/harmony features.",
   "main": "app.js",
   "scripts": {
@@ -25,9 +25,9 @@
   },
   "dependencies": {
     "koa": "0.18.0",
+    "koa-router": "4.2.0",
     "yargs": "3.1.0",
-    "pm2": "0.12.5",
-    "koa-router": "4.2.0"
+    "pm2": "0.12.5"
   },
   "devDependencies": {
     "mocha": "2.1.0",

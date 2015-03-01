@@ -1,18 +1,18 @@
 
 language: node_js
 node_js:
-  	- iojs
+  - iojs
 branches:
-	only:
-		- master
+  only:
+    - master
 notifications:
-	irc:
-		template:
-			- "-=<( *%{result}* )>=-"
-			- "%{repository}#%{build_number} (%{branch} - %{commit}: ${author})"
-			- "commit message: %{commit_message}"
-			- "view changes: %{compare_url}"
-			- "build detalis: %{build_url}"
-			channels:
-			- "irc.freenode.net#sulfurworks"
-			- "irc.freenode.net#mediamoat-dev"
+  irc:
+    template:
+      - "-=<( *%{result}* )>=-"
+      - "%{repository}#%{build_number} (%{branch} - %{commit}: ${author})"
+      - "commit message: %{commit_message}"
+      - "view changes: %{compare_url}"
+      - "build detalis: %{build_url}"
+    channels:
+      - "irc.freenode.net#sulfurworks"
+      - "irc.freenode.net#mediamoat-dev"

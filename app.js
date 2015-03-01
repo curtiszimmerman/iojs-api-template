@@ -1,12 +1,12 @@
 /**
-* @project es6-api-template
+* @project iojs-api-template
 * API template boilerplate for io.js (es6/harmony)
 * @file app.js
 * Primary application driver.
 * @author curtis zimmerman
 * @contact software@curtisz.com
 * @license AGPLv3
-* @version 0.0.2
+* @version 0.0.3
 */
 
 module.exports = exports = __api = (function() {
@@ -21,6 +21,7 @@ module.exports = exports = __api = (function() {
 
 	// local modules
 	var log = require('./lib/log.js');
+	var routes = require('./lib/routes.js');
 
 	// additional init
 	var $app = koa();
@@ -38,7 +39,7 @@ module.exports = exports = __api = (function() {
 		},
 		stats: {
 			processed: 0,
-			version: '0.0.2'
+			version: '0.0.3'
 		}
 	};
 	var $log = null;
@@ -94,7 +95,7 @@ module.exports = exports = __api = (function() {
 			.argv;
 		//
 		//
-		// you gotta sort this shit out with Log (0-4? 1-5? 0-5? wtf)
+		// you gotta sort this shit out with Log (0-4? 1-5? 0-5? wtf). your magnum opus: the log object lol.
 		//
 		//
 		if (typeof($data.settings.argv.loglevel) !== 'undefined') $data.settings.logs.level = $data.settings.argv.loglevel;
@@ -106,13 +107,9 @@ module.exports = exports = __api = (function() {
 	})();
 
 	var server = function() {
-		$router.get('/', function *(next) {
-			// default route
-			this.body = '<html><body><a href="https://github.com/curtiszimmerman/iojs-api-template">iojs-api-template</a> by <a href="http://curtisz.com">curtisz</a></body></html>';
-		});
-
-		$router.get('/about', function *(next) {
-			// get about information
+		// pull in routes.js
+		routes.forEach(function(route) {
+			$app.use(route);
 		});
 
 		$app.use(function*(next) {
