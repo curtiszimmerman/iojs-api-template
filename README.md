@@ -1,4 +1,6 @@
 # iojs-api-template
+
+[![Join the chat at https://gitter.im/curtiszimmerman/iojs-api-template](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/curtiszimmerman/iojs-api-template?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 An API template/boilerplate for io.js and es6/harmony.
 
 ## Prerequisites
