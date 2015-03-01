@@ -1,7 +1,10 @@
 # iojs-api-template
+[![Build Status](https://travis-ci.org/curtiszimmerman/iojs-api-template.svg)](https://travis-ci.org/curtiszimmerman/iojs-api-template)
 
 [![Join the chat at https://gitter.im/curtiszimmerman/iojs-api-template](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/curtiszimmerman/iojs-api-template?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-An API template/boilerplate for io.js and es6/harmony.
+
+## Overview
+iojs-api-template is an API template/boilerplate for io.js and es6/harmony.
 
 ## Prerequisites
 This package requires [io.js](https://iojs.org/) and uses special ES6/Harmony flags to run.
